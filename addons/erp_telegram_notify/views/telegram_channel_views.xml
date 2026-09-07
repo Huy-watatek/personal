@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_telegram_channel_form" model="ir.ui.view">
+        <field name="name">telegram.channel.form</field>
+        <field name="model">telegram.channel</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm"
+                            class="btn-primary" invisible="state == 'confirmed'"/>
+                    <button name="action_send_test" type="object" string="Send Test Message"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Accounting team"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bot_id"/>
+                            <field name="chat_id" placeholder="-1001234567890"/>
+                            <field name="thread_id"/>
+                        </group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_telegram_channel_list" model="ir.ui.view">
+        <field name="name">telegram.channel.list</field>
+        <field name="model">telegram.channel</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="state == 'pending'">
+                <field name="name"/>
+                <field name="bot_id"/>
+                <field name="chat_id"/>
+                <field name="thread_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_telegram_channel" model="ir.actions.act_window">
+        <field name="name">Telegram Channels</field>
+        <field name="res_model">telegram.channel</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Register your first group</p>
+            <p>Add the bot to a Telegram group and type <code>/register</code> there.
+               The channel shows up here as Pending; confirm it and it starts receiving.</p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_server_action_form_telegram" model="ir.ui.view">
+        <field name="name">ir.actions.server.form.telegram</field>
+        <field name="model">ir.actions.server</field>
+        <field name="inherit_id" ref="base.view_server_action_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@name='action_content']//notebook" position="before">
+                <group invisible="state != 'telegram'">
+                    <group string="Who receives it">
+                        <field name="telegram_role_ids" widget="many2many_tags"
+                               placeholder="e.g. Assignee, Approver"/>
+                        <field name="telegram_watcher_role_ids" widget="many2many_tags"/>
+                        <field name="telegram_channel_ids" widget="many2many_tags"/>
+                        <field name="telegram_fallback_channel_id"/>
+                        <field name="telegram_exclude_actor"/>
+                    </group>
+                    <group string="What it says">
+                        <field name="telegram_content_level"/>
+                        <field name="telegram_template_id"
+                               invisible="telegram_content_level != 'full'"/>
+                        <field name="telegram_add_link"/>
+                        <field name="telegram_button_ids" widget="many2many_tags"/>
+                        <button name="action_telegram_preview" type="object"
+                                string="Preview" class="btn-secondary"/>
+                    </group>
+                </group>
+                <div class="alert alert-warning" role="alert"
+                     invisible="state != 'telegram' or telegram_content_level != 'full'">
+                    A Telegram group is outside Odoo's access rules: everyone in it reads
+                    whatever is relayed. Full content is a data-exposure choice, not a
+                    formatting one.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

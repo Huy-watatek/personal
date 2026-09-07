@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_telegram_bot_system,telegram.bot.system,model_telegram_bot,base.group_system,1,1,1,1
+access_telegram_channel_user,telegram.channel.user,model_telegram_channel,base.group_user,1,0,0,0
+access_telegram_channel_system,telegram.channel.system,model_telegram_channel,base.group_system,1,1,1,1
+access_telegram_role_user,telegram.role.user,model_telegram_role,base.group_user,1,0,0,0
+access_telegram_role_system,telegram.role.system,model_telegram_role,base.group_system,1,1,1,1
+access_telegram_button_user,telegram.button.user,model_telegram_button,base.group_user,1,0,0,0
+access_telegram_button_system,telegram.button.system,model_telegram_button,base.group_system,1,1,1,1
+access_telegram_outbox_system,telegram.outbox.system,model_telegram_outbox,base.group_system,1,1,1,1

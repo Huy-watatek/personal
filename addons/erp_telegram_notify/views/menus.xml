@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_telegram_root" name="Telegram"
+              parent="base.menu_administration" sequence="90"
+              groups="base.group_system"/>
+    <menuitem id="menu_telegram_bot" name="Bots"
+              parent="menu_telegram_root" action="action_telegram_bot" sequence="10"/>
+    <menuitem id="menu_telegram_channel" name="Channels"
+              parent="menu_telegram_root" action="action_telegram_channel" sequence="20"/>
+    <menuitem id="menu_telegram_role" name="Recipient Roles"
+              parent="menu_telegram_root" action="action_telegram_role" sequence="30"/>
+    <menuitem id="menu_telegram_button" name="Action Buttons"
+              parent="menu_telegram_root" action="action_telegram_button" sequence="40"/>
+    <menuitem id="menu_telegram_outbox" name="Outbox"
+              parent="menu_telegram_root" action="action_telegram_outbox" sequence="50"/>
+</odoo>

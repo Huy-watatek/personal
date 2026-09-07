@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_telegram_role_form" model="ir.ui.view">
+        <field name="name">telegram.role.form</field>
+        <field name="model">telegram.role</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Approver"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_id" options="{'no_create': True}"/>
+                            <field name="model_name" invisible="1"/>
+                            <field name="kind"/>
+                        </group>
+                        <group>
+                            <field name="field_path" widget="field_selector"
+                                   options="{'model': 'model_name'}"
+                                   invisible="kind != 'field_path'"
+                                   required="kind == 'field_path'"/>
+                            <field name="group_id" invisible="kind != 'group'"
+                                   required="kind == 'group'"/>
+                            <field name="user_ids" widget="many2many_tags"
+                                   invisible="kind != 'users'"
+                                   required="kind == 'users'"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="alert" invisible="kind != 'field_path'">
+                        The path may end on users, partners, or any model carrying a
+                        <code>user_id</code> — so <code>user_id</code>,
+                        <code>partner_id</code> and <code>employee_id.parent_id</code>
+                        all work.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_telegram_role_list" model="ir.ui.view">
+        <field name="name">telegram.role.list</field>
+        <field name="model">telegram.role</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="model_id"/>
+                <field name="kind"/>
+                <field name="field_path"/>
+                <field name="group_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_telegram_role" model="ir.actions.act_window">
+        <field name="name">Recipient Roles</field>
+        <field name="res_model">telegram.role</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Define who cares about a record</p>
+            <p>A role is a reusable way of finding people from the record itself —
+               its assignee, its followers, the manager of its employee. Rules point
+               at roles, so an org change is edited once instead of in every rule.</p>
+        </field>
+    </record>
+</odoo>

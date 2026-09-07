@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_telegram" model="ir.ui.view">
+        <field name="name">res.users.form.telegram</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences']" position="after">
+                <page name="telegram" string="Telegram">
+                    <group>
+                        <group>
+                            <field name="telegram_linked"/>
+                            <field name="telegram_chat_id" invisible="not telegram_linked"/>
+                            <field name="telegram_user_id" invisible="not telegram_linked"/>
+                            <field name="telegram_bind_token" invisible="1"/>
+                            <field name="telegram_bind_url" widget="url"
+                                   invisible="not telegram_bind_url"/>
+                            <field name="telegram_qr_url" invisible="1"/>
+                        </group>
+                        <group>
+                            <button name="action_telegram_generate_link" type="object"
+                                    string="Generate Linking Link" class="btn-primary"
+                                    invisible="telegram_linked"/>
+                            <button name="action_telegram_unlink" type="object"
+                                    string="Unlink Telegram"
+                                    invisible="not telegram_linked"/>
+                        </group>
+                    </group>
+                    <div invisible="not telegram_qr_url or telegram_linked">
+                        <p>Scan this code with the phone that should receive the notifications.
+                           It opens the bot with a one-time token and links the account
+                           automatically — nothing to copy by hand.</p>
+                        <field name="telegram_qr_url" widget="image_url" nolabel="1"
+                               options="{'size': [256, 256]}"/>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
