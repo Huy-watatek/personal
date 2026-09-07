@@ -2,3 +2,6 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
+
+# build artifacts handed to the user, not source
+*.tar.gz
