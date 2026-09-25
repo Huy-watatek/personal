@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_category_hdqt" model="ir.module.category">
+            <field name="name">HĐQT</field>
+            <field name="description">Board-level reporting</field>
+            <field name="sequence">90</field>
+        </record>
+
+        <record id="group_hdqt_viewer" model="res.groups">
+            <field name="name">Board Dashboard Viewer</field>
+            <field name="category_id" ref="module_category_hdqt"/>
+            <field name="comment">
+                Grants access to /hdqt/dashboard. The dashboard aggregates figures
+                across Sales, Invoicing, Inventory and Manufacturing and reads them
+                with elevated rights, so this group alone decides who sees company
+                totals — members need no access rights on the underlying modules.
+                Grant it deliberately.
+            </field>
+        </record>
+    </data>
+</odoo>

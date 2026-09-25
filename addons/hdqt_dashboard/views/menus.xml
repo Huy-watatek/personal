@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_hdqt_dashboard" model="ir.actions.act_url">
+        <field name="name">Board Dashboard</field>
+        <field name="url">/hdqt/dashboard</field>
+        <field name="target">self</field>
+    </record>
+
+    <menuitem id="menu_hdqt_root" name="HĐQT" sequence="8"
+              groups="hdqt_dashboard.group_hdqt_viewer"/>
+    <menuitem id="menu_hdqt_dashboard" name="Dashboard"
+              parent="menu_hdqt_root" action="action_hdqt_dashboard" sequence="10"
+              groups="hdqt_dashboard.group_hdqt_viewer"/>
+</odoo>

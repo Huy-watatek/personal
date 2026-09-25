@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="dashboard_page" name="Board Dashboard">
+        <t t-call="web.layout">
+            <t t-set="title">HĐQT · Dashboard</t>
+            <t t-set="body_classname" t-value="'hdqt-body'"/>
+            <t t-set="head">
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <t t-call-assets="hdqt_dashboard.assets_dashboard" t-js="false"/>
+            </t>
+
+            <div class="viz-root" id="hdqt-root">
+                <header class="hdqt-header">
+                    <div>
+                        <h1 class="hdqt-title">Bảng điều hành HĐQT</h1>
+                        <p class="hdqt-sub" id="hdqt-period">Đang tải…</p>
+                    </div>
+                    <div class="hdqt-header-actions">
+                        <button type="button" class="hdqt-btn" id="hdqt-theme">Sáng / Tối</button>
+                        <a class="hdqt-btn" href="/odoo">Về Odoo</a>
+                    </div>
+                </header>
+
+                <!-- Filters sit in one row above the charts -->
+                <section class="hdqt-filters" aria-label="Bộ lọc">
+                    <div class="hdqt-chips" role="group" aria-label="Kỳ báo cáo">
+                        <button type="button" class="hdqt-chip" data-range="mtd">Tháng này</button>
+                        <button type="button" class="hdqt-chip" data-range="qtd">Quý này</button>
+                        <button type="button" class="hdqt-chip" data-range="ytd">Năm nay</button>
+                        <button type="button" class="hdqt-chip" data-range="d30">30 ngày</button>
+                    </div>
+                    <div class="hdqt-filter-group">
+                        <label for="hdqt-from">Từ</label>
+                        <input type="date" id="hdqt-from" class="hdqt-input"/>
+                        <label for="hdqt-to">đến</label>
+                        <input type="date" id="hdqt-to" class="hdqt-input"/>
+                    </div>
+                    <div class="hdqt-filter-group" id="hdqt-company-wrap" hidden="hidden">
+                        <label for="hdqt-company">Công ty</label>
+                        <select id="hdqt-company" class="hdqt-input" multiple="multiple"/>
+                    </div>
+                    <button type="button" class="hdqt-btn hdqt-btn-primary" id="hdqt-apply">Áp dụng</button>
+                </section>
+
+                <p class="hdqt-error" id="hdqt-error" hidden="hidden" role="alert"/>
+
+                <section class="hdqt-kpis" id="hdqt-kpis" aria-label="Chỉ số chính"/>
+
+                <section class="hdqt-grid">
+                    <figure class="hdqt-card hdqt-card-wide" id="card-trend">
+                        <figcaption>
+                            <h2>Doanh số chốt và doanh thu xuất hoá đơn</h2>
+                            <p>12 tháng gần nhất · cùng đơn vị tiền nên dùng chung một trục</p>
+                        </figcaption>
+                        <div class="hdqt-chart" id="chart-trend"/>
+                        <details class="hdqt-table">
+                            <summary>Xem dạng bảng</summary>
+                            <div id="table-trend"/>
+                        </details>
+                    </figure>
+
+                    <figure class="hdqt-card" id="card-aging">
+                        <figcaption>
+                            <h2>Tuổi nợ phải thu</h2>
+                            <p>Số dư chưa thu tại thời điểm hiện tại</p>
+                        </figcaption>
+                        <div class="hdqt-chart" id="chart-aging"/>
+                        <details class="hdqt-table">
+                            <summary>Xem dạng bảng</summary>
+                            <div id="table-aging"/>
+                        </details>
+                    </figure>
+
+                    <figure class="hdqt-card" id="card-customers">
+                        <figcaption>
+                            <h2>Khách hàng theo doanh số</h2>
+                            <p>10 khách hàng lớn nhất trong kỳ</p>
+                        </figcaption>
+                        <div class="hdqt-chart" id="chart-customers"/>
+                        <details class="hdqt-table">
+                            <summary>Xem dạng bảng</summary>
+                            <div id="table-customers"/>
+                        </details>
+                    </figure>
+
+                    <figure class="hdqt-card" id="card-mrp">
+                        <figcaption>
+                            <h2>Lệnh sản xuất đang mở</h2>
+                            <p>Theo trạng thái</p>
+                        </figcaption>
+                        <div class="hdqt-chart" id="chart-mrp"/>
+                        <details class="hdqt-table">
+                            <summary>Xem dạng bảng</summary>
+                            <div id="table-mrp"/>
+                        </details>
+                    </figure>
+
+                    <figure class="hdqt-card" id="card-picking">
+                        <figcaption>
+                            <h2>Phiếu kho đang mở</h2>
+                            <p>Theo trạng thái</p>
+                        </figcaption>
+                        <div class="hdqt-chart" id="chart-picking"/>
+                        <details class="hdqt-table">
+                            <summary>Xem dạng bảng</summary>
+                            <div id="table-picking"/>
+                        </details>
+                    </figure>
+                </section>
+
+                <footer class="hdqt-footer">
+                    <span id="hdqt-generated"/>
+                    <span>Nguồn: sale.order · account.move · stock.quant · stock.picking · mrp.production</span>
+                </footer>
+            </div>
+
+            <t t-call-assets="hdqt_dashboard.assets_dashboard" t-css="false"/>
+        </t>
+    </template>
+</odoo>
